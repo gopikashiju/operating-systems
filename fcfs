@@ -1,0 +1,40 @@
+#include<stdio.h>
+void main()
+{
+printf("FCFS\n");
+int n,i, pid,at,bt[10],ct,tat[10],wt[10],awt,atat,twt,ttat;
+printf("enter the number of processes\n");
+scanf("%d",&n);
+printf("enter the burst time\n");
+for(i=1;i<=n;i++)
+{
+scanf("%d",&bt[i]);
+}
+for(i=1;i<=n;i++)
+{
+printf("|%d ",i);
+}
+printf("\n");
+for(i=1;i<=n;i++)
+{
+ct = ct+bt[i];
+tat[i]=ct;
+wt[i]=tat[i]-bt[i];
+printf("%d ",ct);
+}
+printf("\n");
+printf("\nprocess BT TAT WT\n");
+for(i=1;i<=n;i++)
+{
+printf("%d %d %d %d \n",i,bt[i],tat[i],wt[i]);
+}
+printf("\n");
+for(i=1;i<=n;i++)
+{
+awt=(awt+wt[i])/n;
+atat=(atat+tat[i])/n;
+twt=twt+wt[i];
+ttat=ttat+tat[i];
+}
+printf(" total WT = %d\n average WT = %d\n total TAT = %d\n average TAT = %d\n",twt,awt,ttat,atat);
+}
