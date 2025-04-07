@@ -1,0 +1,97 @@
+#include<stdio.h>
+int main()
+{
+int n, m, i, j, k, alloc[20][20], max[20][20], avail[50], ind = 0;
+printf("Enter the number of processes: ");
+scanf("%d", &n);
+printf("Enter the number of resources: ");
+scanf("%d", &m);
+printf("Enter the Allocation Matrix:\n");
+for(i = 0; i < n; i++)
+{
+for(j = 0; j < m; j++)
+{
+scanf("%d", &alloc[i][j]);
+}
+}
+printf("Enter the Max Matrix:\n");
+for(i = 0; i < n; i++)
+{
+for(j = 0; j < m; j++)
+{
+scanf("%d", &max[i][j]);
+}
+}
+printf("Enter the Available Matrix:\n");
+for(i = 0; i < m; i++)
+{
+scanf("%d", &avail[i]);
+}
+int finish[n], safesequence[n], work[m], need[n][m];
+for(i = 0; i < m; i++)
+{
+work[i] = avail[i];
+}
+for(i = 0; i < n; i++)
+{
+finish[i] = 0;
+}
+// Calculating NEED matrix
+for(i = 0; i < n; i++)
+{
+for(j = 0; j < m; j++)
+{
+need[i][j] = max[i][j] - alloc[i][j];
+}
+}
+
+printf("NEED matrix is:\n");
+for(i = 0; i < n; i++)
+{
+for(j = 0; j < m; j++)
+{
+printf("%d ", need[i][j]); // Add space for better formatting
+}
+printf("\n");
+}
+// Safety Algorithm
+for(i = 0; i < n; i++)
+{
+finish[i] = 0;
+}
+for(k = 0; k < n; k++)
+{
+for(i = 0; i < n; i++)
+{
+if(finish[i] == 0)
+{
+int flag = 0;
+for(j = 0; j < m; j++)
+{
+if(need[i][j] > work[j])
+{
+flag = 1; // Set flag to 1 if need[i][j] is greater than work[j]
+break;
+}
+}
+if(flag == 0) // If all needs are met
+{
+safesequence[ind++] = i; // Add process to safe sequence
+for(int y = 0; y < m; y++)
+{
+work[y] += alloc[i][y]; // Update work
+}
+finish[i] = 1; // Mark process as finished
+}
+}
+}
+}
+// Printing the safe sequence
+printf("\nFollowing is the SAFE Sequence: ");
+for(i = 0; i < n; i++) // Print all processes in the safe sequence
+{
+printf("P%d ", safesequence[i]);
+}
+printf("\n");
+return 0;
+}
