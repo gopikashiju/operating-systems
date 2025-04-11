@@ -1,0 +1,22 @@
+#include<stdio.h>
+void main()
+{
+    int dis,a[10],tot=0,head,n,i;
+    printf("enter head pos");
+    scanf("%d",&head);
+    printf("no of req");
+    scanf("%d",&n);
+    printf("req");
+    for(i=1;i<=n;i++)
+    {
+        scanf("%d",&a[i]);
+    }
+    a[0]=head;
+    for(i=0;i<n;i++)
+    {
+        dis=(a[i]>a[i+1])?a[i]-a[i+1]:a[i+1]-a[i];
+        printf("dis from  %d to %d is %d \n",a[i],a[i+1],dis);
+        tot=tot+dis;
+    }
+    printf("total is %d",tot);
+}
