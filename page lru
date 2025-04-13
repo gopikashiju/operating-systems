@@ -1,0 +1,70 @@
+#include<stdio.h>
+void main()
+{
+    int i,j=0,n,no,k,frame[10],time[10],a[10],avail,lru,lrui,count=0;
+    printf("enter no of page");
+    scanf("%d",&no);
+    printf("enter page");
+    for(i=1;i<=no;i++)
+    {
+      scanf("%d",&a[i]);
+    }
+    printf("enter frames");
+    scanf("%d",&n);
+    for(i=0;i<n;i++)
+    {
+        frame[i]=-1;
+        time[i]=0;
+    }
+    printf("string      frame\n");
+    for(i=1;i<=no;i++)
+    {
+        printf("%d\t",a[i]);
+        avail=0;
+        for(k=0;k<n;k++)
+        {
+            if(frame[k]==a[i])
+            {
+                avail=1;
+                time[k]=i;
+                break;
+            }
+        }
+            if(avail==0)
+            {
+                lru=time[0];
+                lrui=0;
+                for(k=1;k<n;k++)
+                {
+                    if(time[k]<lru)
+                    {
+                        lru=time[k];
+                        lrui=k;
+                    }
+                }
+                frame[lrui]=a[i];
+                    time[lrui]=i;
+                    count++;
+                    for(k=0;k<n;k++)
+                    {
+                        if(frame[k]!=-1)
+                        {
+                            printf("%d\t",frame[k]);
+                        }
+                        else
+                        {
+                            printf("-\t");
+                        }
+                    }
+            }
+            else
+            {
+                printf("hit");
+            }
+                
+       printf("\n");     
+        }
+        
+    
+    printf("\ncount is %d",count);
+}
